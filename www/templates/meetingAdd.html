@@ -1,0 +1,25 @@
+<ion-view view-title="Add Meeting">
+    <ion-content>
+    <form ng-submit="addListItem(meetingForm)" name="addMeetingForm" validate>
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Meeting Details (Name:Time:date)</span>
+                <input type="text" placeholder="Meeting Name" ng-model="meetingForm.meetingName">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Dail Number</span>
+                <input type="number" placeholder="Dail Number" ng-model="meetingForm.dailNumber">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Meeting Number</span>
+                <input type="number" placeholder="Meeting Number" ng-model="meetingForm.meetingNumber">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Attendee Id/Passcode</span>
+                <input type="text" placeholder="Attendee Id/Passcode" ng-model="meetingForm.attendeeId">
+            </label>
+            <button class="button button-block button-positive" type="submit">Save To Local Memory</button>
+        </div>
+      </form>
+    </ion-content>
+</ion-view>
