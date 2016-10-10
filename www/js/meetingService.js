@@ -6,9 +6,9 @@ angular.module('meetingService',[])
 
 var meetingServiceFact = {};
 
-meetingServiceFact.addMeetingToLacelStorage = () => {
-	console.log('-------->addMeetingToLacelStorage-------->');
-};
+// meetingServiceFact.addMeetingToLacelStorage = () => {
+// 	console.log('-------->addMeetingToLacelStorage-------->');
+// };
 
 meetingServiceFact.getMeetingToLacelStorage = function (){
 
@@ -19,27 +19,28 @@ $timeout(function(){
 
 deferred.resolve('Jaga');
 
-}, 1000000000);
+}, 1000000);
 
 
-	console.log('-------->getNewMeetingToLacelStorage-------->');
+//	console.log('-------->getNewMeetingToLacelStorage-------->');
    return deferred.promise;
 };
 
-meetingServiceFact.editMeetingToLacelStorage = function (){
-  console.log('-------->editMeetingToLacelStorage-------->');
+meetingServiceFact.deleteAllList = function (){
+ $window.localStorage.clear();
+   console.log('--------Delete all-------->');
 };
-
-meetingServiceFact.deleteMeetingToLacelStorage = function (){
-  console.log('-------->deleteNewMeetingToLacelStorage-------->');
-};
-
-meetingServiceFact.checkMeetingToLacelStorage = function (){
-  console.log('-------->checkNewMeetingToLacelStorage-------->');
-};
+//
+// meetingServiceFact.deleteMeetingToLacelStorage = function (){
+//   console.log('-------->deleteNewMeetingToLacelStorage-------->');
+// };
+//
+// meetingServiceFact.checkMeetingToLacelStorage = function (){
+//   console.log('-------->checkNewMeetingToLacelStorage-------->');
+// };
 return meetingServiceFact;
 
-}])	
+}])
 
 
 .factory('$localstorage', ['$window', function($window) {
@@ -55,6 +56,11 @@ return meetingServiceFact;
     },
     getObject: function(key) {
       return JSON.parse($window.localStorage[key] || '{}');
+    },removeAll: function(){
+        $window.localStorage.clear();
+   console.log('--------Delete all-------->key');
+
+
     }
   }
 }]);

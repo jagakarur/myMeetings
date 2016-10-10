@@ -1,32 +1,18 @@
 <ion-view view-title="My Meeting List">
-    <ion-content>
- <!--        <ion-list class="list card">
-            <ion-item>
-               
-                    <a ng-click="callMeeting('2104562663,621030598##')"><p></p></a>
-               
-            </ion-item>
-            <ion-item>
-            
-                    <a ng-click="callMeeting('2104562663,623164852##')"><p>Wend-Meeting-9:30-10PM('2104562663,623164852##')</p></a> 
+  <ion-content>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
 
-            </ion-item>
-        </ion-list>
- -->
-<div class="list card">
-          <a class="item item-icon-left mettingList" ng-click="callMeeting('2104562663,621030598##')"><i class="icon ion-android-call"></i>Meeting:<p>Thu-Meeting-9-10PM('2104562663,621030598##')</p></a>
-        
-          <a class="item item-icon-left mettingList" ng-click="callMeeting('2104562663,623164852##')"><i class="icon ion-android-call"></i>Meeting:<p>Wend-Meeting-9:30-10PM('2104562663,623164852##')</p></a>
-         
-          
-      </div>
+    <div ng-hide="meetingList">Meeting list is empty...</div>
 
+    <div class="list card" ng-repeat="meeting in meetingList">
+      <a class="item item-icon-left mettingList"
+         on-hold="onHoldToDelete()" ng-click="callMeeting('{{meeting.dailNumber}},{{meeting.meetingNumber}}##')"><i
+        class="icon ion-android-call"></i>Meeting:<p>{{meeting.meetingName}} Meeting Id: {{meeting.meetingNumber}}</p>
+      </a>
+    </div>
 
- <div class="list card" ng-repeat="meeting in meetingList">
-          <a class="item item-icon-left mettingList" ng-click="callMeeting('{{meeting.dailNumber}},{{meeting.meetingNumber}}##')"><i class="icon ion-android-call"></i>Meeting:<p>{{meeting.meetingName}} Meeting Id: {{meeting.meetingNumber}}</p></a>
-   
-      </div>
-
-
-    </ion-content>
+  </ion-content>
 </ion-view>

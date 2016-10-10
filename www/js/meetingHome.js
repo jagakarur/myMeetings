@@ -1,7 +1,7 @@
 angular.module('meetingHome', ['ionic','meetingService'])
 
-.controller('meetingHomeCtrl', function($scope, $ionicPopup, meetingServiceFact, $localstorage) {
-    $scope.meetingList={};
+.controller('meetingHomeCtrl', function($scope, $ionicPopup, meetingServiceFact, $localstorage, $ionicHistory) {
+
     $scope.callMeeting = function(dailNumber) {
         var confirmPopup = $ionicPopup.confirm({
             title: 'Call to number',
@@ -21,9 +21,23 @@ angular.module('meetingHome', ['ionic','meetingService'])
                 if (meetingJsonDataTotal && meetingJsonDataTotal.meeting) {
                     $scope.meetingList = meetingJsonDataTotal.meeting;
                 };
-                meetingServiceFact.addMeetingToLacelStorage();
+             //   meetingServiceFact.addMeetingToLacelStorage();
                 meetingServiceFact.getMeetingToLacelStorage();
-                 meetingServiceFact.editMeetingToLacelStorage();
+                // meetingServiceFact.editMeetingToLacelStorage();
     };
     $scope.loadMeeting();
+
+  $scope.doRefresh = function() {
+    $scope.loadMeeting();
+        $scope.$broadcast('scroll.refreshComplete');
+
+  };
+
+  $scope.onHoldToDelete = function () {
+  $localstorage.removeAll();
+$ionicHistory.clearCache();
+    $ionicHistory.clearHistory();
+
+  };
+
 });

@@ -33,6 +33,7 @@ angular.module('meetingAdd', ['ionic', 'meetingService'])
                     };
                     meetingJsonDataTotal.meeting.push(meeting);
                     $localstorage.setObject('meetingLS', meetingJsonDataTotal);
+                  
                 };
 
             }
