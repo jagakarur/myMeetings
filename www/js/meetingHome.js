@@ -1,6 +1,6 @@
 angular.module('meetingHome', ['ionic','meetingService'])
 
-.controller('meetingHomeCtrl', function($scope, $ionicPopup, meetingServiceFact, $localstorage, $ionicHistory) {
+.controller('meetingHomeCtrl', function($scope, $ionicPopup, meetingServiceFact, $localstorage, $ionicHistory, $state) {
 
     $scope.callMeeting = function(dailNumber) {
         var confirmPopup = $ionicPopup.confirm({
@@ -22,7 +22,7 @@ angular.module('meetingHome', ['ionic','meetingService'])
                     $scope.meetingList = meetingJsonDataTotal.meeting;
                 };
              //   meetingServiceFact.addMeetingToLacelStorage();
-                meetingServiceFact.getMeetingToLacelStorage();
+                //meetingServiceFact.getMeetingToLacelStorage();
                 // meetingServiceFact.editMeetingToLacelStorage();
     };
     $scope.loadMeeting();
@@ -33,11 +33,27 @@ angular.module('meetingHome', ['ionic','meetingService'])
 
   };
 
-  $scope.onHoldToDelete = function () {
-  $localstorage.removeAll();
-$ionicHistory.clearCache();
+  $scope.deleteAll= function () {
+
+    $localstorage.removeAll();
+    $ionicHistory.clearCache();
     $ionicHistory.clearHistory();
 
+  };
+
+  $scope.deleteMe= function(meeting){
+  //console.log(meeting);
+
+ //console.log($scope.meetingList);
+
+ var index = $scope.meetingList.indexOf(meeting);
+   $scope.meetingList.splice(index, 1);
+
+   var mettingJson = {
+    meeting: $scope.meetingList
+   }
+   $localstorage.setObject('meetingLS', mettingJson);
+   $state.reload();
   };
 
 });

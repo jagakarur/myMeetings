@@ -1,5 +1,6 @@
 <ion-view view-title="My Meeting List">
-  <ion-content>
+
+  <ion-content overflow-scroll="true" scrollbar-y="false" has-bouncing="false" class="padding">
     <ion-refresher
       pulling-text="Pull to refresh..."
       on-refresh="doRefresh()">
@@ -7,12 +8,39 @@
 
     <div ng-hide="meetingList">Meeting list is empty...</div>
 
-    <div class="list card" ng-repeat="meeting in meetingList">
+    <!-- <div class="list card" ng-repeat="meeting in meetingList">
       <a class="item item-icon-left mettingList"
          on-hold="onHoldToDelete()" ng-click="callMeeting('{{meeting.dailNumber}},{{meeting.meetingNumber}}##')"><i
         class="icon ion-android-call"></i>Meeting:<p>{{meeting.meetingName}} Meeting Id: {{meeting.meetingNumber}}</p>
       </a>
     </div>
 
-  </ion-content>
+<ion-list>
+  <ion-item-sliding ng-repeat="meeting in meetingList" >
+  <ion-item class="item-icon-left mettingList"
+            item="meeting"
+            ng-click="callMeeting('{{meeting.dailNumber}},{{meeting.meetingNumber}}##')">
+    <i class="icon ion-android-call"></i>Meeting: {{meeting.meetingName}} Meeting Id: {{meeting.meetingNumber}}
+
+    <ion-option-button class="icon ion-trash-a"></ion-option-button>
+  </ion-item>
+  </ion-item-sliding>
+</ion-list>
+
+  </ion-content>-->
+
+
+    <ion-list can-swipe="true">
+      <ion-item item="group" collection-repeat="meeting in meetingList" class="item-text-wrap" ng-click="callMeeting('{{meeting.dailNumber}},{{meeting.meetingNumber}}##')">
+
+        <span><i class="icon ion-android-call"></i>&nbsp;&nbsp;Meeting: {{meeting.meetingName}} Meeting Id: {{meeting.meetingNumber}}
+       </span>
+        <ion-option-button class="button-light icon ion-edit"></ion-option-button>
+
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteMe(meeting)"> Delete</ion-option-button>
+      </ion-item>
+    </ion-list>
+    </ion-content>
+
+
 </ion-view>

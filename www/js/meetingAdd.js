@@ -1,6 +1,6 @@
 angular.module('meetingAdd', ['ionic', 'meetingService'])
 
-.controller('meetingAddCtrl', function($scope, $ionicPopup, meetingServiceFact, $localstorage) {
+.controller('meetingAddCtrl', function($scope, $ionicPopup, meetingServiceFact, $localstorage, $location) {
     //addListItem(meetingName, dailNumber, meetingNumber, attendeeId)
     $scope.addListItem = function(meetingForm) {
         var confirmPopup = $ionicPopup.confirm({
@@ -33,9 +33,10 @@ angular.module('meetingAdd', ['ionic', 'meetingService'])
                     };
                     meetingJsonDataTotal.meeting.push(meeting);
                     $localstorage.setObject('meetingLS', meetingJsonDataTotal);
-                  
-                };
 
+                };
+                //$state.reload();
+              $location.path('/meetingHome');
             }
         });
 
